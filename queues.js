@@ -89,7 +89,7 @@ const mms = (a, u, s) => {
 
 const mmsp0 = (a, u, s) => {
   let sum = 0;
-  for (let n = 0; n < s; n++) {
+  for (let n = 0; n < s+1; n++) {
     sum += Math.pow(a / u, n) / factorial(n);
   }
   return sum;
@@ -108,10 +108,10 @@ const mmsk = (a, u, s, k) => {
   const d = a / (s * u);
 
   // p de que no haya unidades en el sistema
-  let p0Part1 = mmsp0(a, u, s);
+  let p0Part1 = mmsp03(a, u, s);
   let p0Part2 = Math.pow(a / u, s) / factorial(s);
   let p0Part3 = mmsp02(a, u, s, k);
-  const p0 = 1 / (p0Part1 + p0Part2 * p0Part3);
+  const p0 = 1 / (p0Part1 + (p0Part2 * p0Part3));
   //Probabilidad de haya n unidades en cola
   let pn;
   if (n <= s) {
@@ -152,7 +152,7 @@ const mmsk = (a, u, s, k) => {
   const ws = wq + 1 / u;
 
   //Tiempo promedio de unidades en el sistema
-  const ls = ae / ws;
+  const ls = ae * ws;
 
   //Probabilidad de que una unidad que llega tenga que esperar por el servicio
   const pw = (Math.pow(a / u, s) / factorial(s)) * ((s * u) / (s * u - a)) * p0;
@@ -178,6 +178,15 @@ const mmsp02 = (a, u, s, k) => {
   }
   return sum;
 };
+
+const mmsp03 = (a, u, s) => {
+  let sum = 0;
+  for (let n = 0; n < s+1; n++) {
+    sum += Math.pow(a / u, n) / factorial(n);
+  }
+  return sum;
+};
+
 
 // Example usage
 console.log(mmsk(2, 3, 1, 3));
