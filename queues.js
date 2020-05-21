@@ -6,98 +6,158 @@ const factorial = (n) => {
   return fact;
 };
 
-/* Markovian Markovian s=1*/
-const mm1 = (a, u) => {
-  const ws = 1 / (u - a); //tiempo de una persona
-  const lq = (a * a) / (u * (u - a)); // cantidad promedio de clientes
-  const wq = lq / a; // tiempo promedio en la cola
-  const d = a / u; // factor de uso del sistema, probabilidad de que un cliente tiene que esperar
-  const pn = Math.pow(d, n) * p0; //probilidad de nclientes
-  const p0 = 1 - d; // cola  vacia
-
-  return {
-    d,
-    p0,
-    pn,
-    lq,
-    ls,
-    wq,
-    ws,
-  };
-};
-
-/* Example usage */
-/* console.log(mm1(2, 3)); */
-
-//----------------------------------------------------------
-/* Markovian Markovian s<1*/
-const mms = (a, u, s) => {
-  //factor de utilizacion
-  const d = a / (s * u);
-  let n = 0;
-  // p de que no haya unidades en el sistema
-  let p0Part1 = sumatoryA(a, u, s);
-  let p0Part2 = Math.pow(a / u, s) / factorial(s);
-  let p0Part3 = (s * u) / (s * u - a);
-  const p0 = 1 / (p0Part1 + p0Part2 * p0Part3);
-
-  //Probabilidad de haya n unidades en cola
-  let pn;
-  if (n <= s) {
-    pn = (Math.pow(a / u, n) / factorial(n)) * p0;
-  } else {
-    pn = (Math.pow(a / u, n) / factorial(s)) * Math.pow(s, n - s) * p0;
-  }
-
-  //Ni la menor idea que sea Cn, pero viene en la presentacion de bolo
-  let cn;
-  if (n <= s) {
-    cn = Math.pow(a / u, n) / factorial(n);
-  } else {
-    cn = (Math.pow(a / u, n) / factorial(s)) * Math.pow(s, n - s);
-  }
-
-  //Tiempo promedio de unidades en cola
-  const lq =
-    ((Math.pow(a / u, s) * (u * a)) /
-      (factorial(s - 1) * Math.pow(s * u - a, 2))) *
-    p0;
-
-  //Tiempo promedio de unidades en el sistema
-  const ls = lq + a / u;
-
-  //Tiempo promedio que una unidad pasa en la cola
-  const wq = lq / a;
-
-  //Tiempo promoedio que una unidad pasa en el sistema
-  const ws = wq + 1 / u;
-
-  //Probabilidad de que una unidad que llega tenga que esperar por el servicio
-  const pw = (Math.pow(a / u, s) / factorial(s)) * ((s * u) / (s * u - a)) * p0;
-
-  return {
-    d,
-    p0,
-    pn,
-    lq,
-    ls,
-    wq,
-    ws,
-    pw,
-  };
-};
-
 const sumatoryA = (a, u, s) => {
   let sum = 0;
-  for (let n = 0; n < s+1; n++) {
+  for (let n = 0; n < s; n++) {
     sum += Math.pow(a / u, n) / factorial(n);
   }
   return sum;
 };
 
-// Example usage
-// console.log(mms(2, 3, 2));
+/*
+Esto es lo que quiere Polo para cada uno de los modelos:
+
+ro
+
+p0
+pn
+
+lq
+l
+
+wq
+w
+
+costo promedio del servicio
+
+Hacer validación de lo que el usuario va a meter como input
+*/
+
+/* Markovian markovian 1 */
+
+class mm1 {
+  constructor(a, u) {
+    this.a = a;
+    this.u = u;
+
+    this.d = a / u; // factor de uso del sistema, probabilidad de que un cliente tiene que esperar
+
+    this.lq = (a * a) / (u * (u - a)); // cantidad promedio de clientes
+    this.ls = this.lq + this.d;
+
+    this.wq = this.lq / a; // tiempo promedio en la cola
+    this.ws = 1 / (u - a); //tiempo de una persona
+
+    this.p0 = 1 - this.d; // cola  vacia
+  }
+
+  pn = (n) => {
+    if (n <= 1) {
+      return (Math.pow(this.a / this.u, n) / factorial(n)) * this.p0;
+    } else {
+      return (
+        (Math.pow(this.a / this.u, n) / factorial(1)) *
+        Math.pow(1, n - 1) *
+        this.p0
+      );
+    }
+  };
+
+  pnCumulative = (n) => {
+    let p = 0;
+
+    for (let i = 0; i <= n; i++) {
+      p += this.pn(i);
+    }
+
+    return p;
+  };
+
+  general = () => {
+    return {
+      ro: this.d,
+      p0: this.p0,
+      lq: this.lq,
+      l: this.ls,
+      wq: this.wq,
+      w: this.ws,
+    };
+  };
+}
+
+/* Example usage */
+/* const m = new mm1(2, 3);
+console.log(m.general());
+console.log(m.pn(2));
+console.log(m.pnCumulative(2)); */
+
+//----------------------------------------------------------
+/* Markovian Markovian S*/
+
+class mms {
+  constructor(a, u, s) {
+    this.a = a;
+    this.u = u;
+    this.s = s;
+
+    this.d = a / (s * u);
+
+    // p de que no haya unidades en el sistema
+    let p0Part1 = sumatoryA(a, u, s);
+    let p0Part2 = Math.pow(a / u, s) / factorial(s) / (1 - a / (s * u));
+    this.p0 = 1 / (p0Part1 + p0Part2); // cola  vacia
+
+    this.lq =
+      ((Math.pow(a / u, s) * (u * a)) /
+        (factorial(s - 1) * Math.pow(s * u - a, 2))) *
+      this.p0;
+    this.ls = this.lq + a / u;
+    this.wq = this.lq / a;
+    this.ws = this.wq + 1 / u; // factor de uso del sistema, probabilidad de que un cliente tiene que esperar
+  }
+
+  pn = (n) => {
+    //Probabilidad de haya n unidades en cola
+    if (n <= this.s) {
+      return (Math.pow(this.a / this.u, n) / factorial(n)) * this.p0;
+    } else {
+      return (
+        (Math.pow(this.a / this.u, n) / factorial(this.s)) *
+        Math.pow(this.s, n - this.s) *
+        this.p0
+      );
+    }
+  };
+
+  pnCumulative = (n) => {
+    let p = 0;
+
+    for (let i = 0; i <= n; i++) {
+      p += this.pn(i);
+    }
+
+    return p;
+  };
+
+  general = () => {
+    return {
+      ro: this.d,
+      p0: this.p0,
+      lq: this.lq,
+      l: this.ls,
+      wq: this.wq,
+      w: this.ws,
+    };
+  };
+}
+
+/* Example usage */
 // Foto del ejemplo que si sirve: https://ibb.co/RSknMZc
+
+/* const m = new mms(2, 3, 2);
+console.log(m.general());
+console.log(m.pn(2));
+console.log(m.pnCumulative(2)); */
 
 //----------------------------------------------------------
 /* Markovian Markovian s<1 con limite K de usuarios */
@@ -111,7 +171,7 @@ const mmsk = (a, u, s, k) => {
   let p0Part1 = sumatoryB(a, u, s);
   let p0Part2 = Math.pow(a / u, s) / factorial(s);
   let p0Part3 = sumatoryC(a, u, s, k);
-  const p0 = 1 / (p0Part1 + (p0Part2 * p0Part3));
+  const p0 = 1 / (p0Part1 + p0Part2 * p0Part3);
   //Probabilidad de haya n unidades en cola
   let pn;
   if (n <= s) {
@@ -181,12 +241,11 @@ const sumatoryC = (a, u, s, k) => {
 
 const sumatoryB = (a, u, s) => {
   let sum = 0;
-  for (let n = 0; n < s+1; n++) {
+  for (let n = 0; n < s + 1; n++) {
     sum += Math.pow(a / u, n) / factorial(n);
   }
   return sum;
 };
-
 
 // Example usage
 //console.log(mmsk(2, 3, 1, 3));
