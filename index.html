@@ -5,13 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Modelo de Filas</title>
+    <title>Queueing Theory Calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-
+    <h1>Queueing Theory Calculator</h1>
+    <div class="options">
+        <div class="option mm1" onclick="selectTab('mm1')">
+            <div>
+                <h2>M/M/1</h2>
+                <p>One server</p>
+            </div>
+        </div>
+        <div class="option mms" onclick="selectTab('mms')">
+            <div>
+                <h2>M/M/S</h2>
+                <p>S servers</p>
+            </div>
+        </div>
+        <div class="option mmsk" onclick="selectTab('mmsk')">
+            <div>
+                <h2>M/M/S/K</h2>
+                <p>S server, only hold K customers </p>
+            </div>
+        </div>
+        <div class="option mg1" onclick="selectTab('mg1')">
+            <div>
+                <h2>M/G/1</h2>
+                <p>One server (General Distribution)</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form class="inputs mm1">
+        <div class="input">
+            <label><span>λ</span> arrivals/minutes</label>
+            <input required type="number" min="0" name="a" value="">
+        </div>
+        <div class="input">
+            <label><span>μ</span> services/minutes</label>
+            <input required type="number" min="0" name="u" value="">
+        </div>
+        <div class="input clear"></div>
+        <button class="input" type="submit">Calcular</button class="input">
+    </form>
 </body>
 
+<script src="./gui.js"> </script>
 <script src="./queues.js"> </script>
 
 </html>

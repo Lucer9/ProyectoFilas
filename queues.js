@@ -250,3 +250,10 @@ const sumatoryB = (a, u, s) => {
 // Example usage
 //console.log(mmsk(2, 3, 1, 3));
 // Foto del ejemplo que si sirve: https://ibb.co/RSknMZc
+
+
+
+
+
+
+

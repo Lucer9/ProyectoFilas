@@ -1,0 +1,108 @@
+body {
+  background-color: #2d2f34;
+}
+* {
+  font-family: "Poppins", sans-serif;
+}
+h1 {
+  text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: white;
+}
+h2 {
+  text-align: center;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: white;
+  margin: 0;
+}
+
+p {
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.options {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.option {
+  background-color: #2a2b2f;
+  max-width: 325px;
+  width: 100%;
+  min-height: 120px;
+  margin: 10px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.option:hover {
+  box-shadow: 0px 0px 3px 3px rgba(50, 174, 118, 0.3);
+}
+
+.option.active {
+  box-shadow: 0px 0px 3px 3px rgba(50, 174, 118, 0.3);
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-evenly;
+  display: none;
+}
+
+.input {
+  color: white;
+  max-width: 325px;
+  width: 100%;
+  min-height: 120px;
+  margin: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.inputs.active {
+  display: flex;
+}
+
+.input label span {
+  font-size: 38px;
+  display: block;
+  font-weight: 400;
+}
+
+.input input {
+  background-color: #2a2b2f;
+  color: white;
+  border: 0;
+  font-size: 20px;
+  display: block;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.clear {
+  background-color: transparent;
+}
+
+button.input {
+  background-color: rgb(50, 174, 118);
+  color: rgba(0, 0, 0, 0.3);
+  border: 0;
+  transition: 0.5s ease all;
+  cursor: pointer;
+}
+
+button.input:hover {
+  background-color: rgb(20, 124, 77);
+}
