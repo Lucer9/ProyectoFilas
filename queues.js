@@ -36,7 +36,7 @@ const mms = (a, u, s) => {
   const d = a / (s * u);
   let n = 0;
   // p de que no haya unidades en el sistema
-  let p0Part1 = mmsp0(a, u, s);
+  let p0Part1 = sumatoryA(a, u, s);
   let p0Part2 = Math.pow(a / u, s) / factorial(s);
   let p0Part3 = (s * u) / (s * u - a);
   const p0 = 1 / (p0Part1 + p0Part2 * p0Part3);
@@ -87,7 +87,7 @@ const mms = (a, u, s) => {
   };
 };
 
-const mmsp0 = (a, u, s) => {
+const sumatoryA = (a, u, s) => {
   let sum = 0;
   for (let n = 0; n < s+1; n++) {
     sum += Math.pow(a / u, n) / factorial(n);
@@ -108,9 +108,9 @@ const mmsk = (a, u, s, k) => {
   const d = a / (s * u);
 
   // p de que no haya unidades en el sistema
-  let p0Part1 = mmsp03(a, u, s);
+  let p0Part1 = sumatoryB(a, u, s);
   let p0Part2 = Math.pow(a / u, s) / factorial(s);
-  let p0Part3 = mmsp02(a, u, s, k);
+  let p0Part3 = sumatoryC(a, u, s, k);
   const p0 = 1 / (p0Part1 + (p0Part2 * p0Part3));
   //Probabilidad de haya n unidades en cola
   let pn;
@@ -171,7 +171,7 @@ const mmsk = (a, u, s, k) => {
   };
 };
 
-const mmsp02 = (a, u, s, k) => {
+const sumatoryC = (a, u, s, k) => {
   let sum = 0;
   for (let n = s + 1; n < k + 1; n++) {
     sum += Math.pow(a / (s * u), n - s);
@@ -179,7 +179,7 @@ const mmsp02 = (a, u, s, k) => {
   return sum;
 };
 
-const mmsp03 = (a, u, s) => {
+const sumatoryB = (a, u, s) => {
   let sum = 0;
   for (let n = 0; n < s+1; n++) {
     sum += Math.pow(a / u, n) / factorial(n);
@@ -189,5 +189,5 @@ const mmsp03 = (a, u, s) => {
 
 
 // Example usage
-console.log(mmsk(2, 3, 1, 3));
+//console.log(mmsk(2, 3, 1, 3));
 // Foto del ejemplo que si sirve: https://ibb.co/RSknMZc
