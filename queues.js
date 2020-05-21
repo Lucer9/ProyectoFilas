@@ -73,6 +73,10 @@ class mm1 {
     return p;
   };
 
+  totalCost = (cW, cS) => {
+    return this.lq * cW + cS;
+  };
+
   general = () => {
     return {
       ro: this.d,
@@ -89,7 +93,8 @@ class mm1 {
 /* const m = new mm1(2, 3);
 console.log(m.general());
 console.log(m.pn(2));
-console.log(m.pnCumulative(2)); */
+console.log(m.pnCumulative(2));
+console.log(m.totalCost(15, 12)); */
 
 //----------------------------------------------------------
 /* Markovian Markovian S*/
@@ -139,6 +144,10 @@ class mms {
     return p;
   };
 
+  totalCost = (cW, cS) => {
+    return this.lq * cW + this.s * cS;
+  };
+
   general = () => {
     return {
       ro: this.d,
@@ -157,7 +166,8 @@ class mms {
 /* const m = new mms(2, 3, 2);
 console.log(m.general());
 console.log(m.pn(2));
-console.log(m.pnCumulative(2)); */
+console.log(m.pnCumulative(2));
+console.log(m.totalCost(15, 12)); */
 
 //----------------------------------------------------------
 /* Markovian Markovian s<1 con limite K de usuarios */
@@ -280,6 +290,10 @@ class mg1 {
     return p;
   };
 
+  totalCost = (cW, cS) => {
+    return this.lq * cW + 1 * cS;
+  };
+
   general = () => {
     return { ...this, pn: null, pnCumulative: null };
   };
@@ -289,4 +303,6 @@ class mg1 {
 /* const m = new mg1(3, 5, 0.1, 15, 1);
 console.log(m.general());
 console.log(m.pn(0));
-console.log(m.pnCumulative(0)); */
+console.log(m.pnCumulative(0));
+console.log(m.totalCost(15, 12));
+ */
