@@ -73,6 +73,10 @@ class mm1 {
     return p;
   };
 
+  totalCost = (cW, cS) => {
+    return this.lq * cW + cS;
+  };
+
   general = () => {
     return {
       ro: this.d,
@@ -89,7 +93,8 @@ class mm1 {
 /* const m = new mm1(2, 3);
 console.log(m.general());
 console.log(m.pn(2));
-console.log(m.pnCumulative(2)); */
+console.log(m.pnCumulative(2));
+console.log(m.totalCost(15, 12)); */
 
 //----------------------------------------------------------
 /* Markovian Markovian S*/
@@ -139,6 +144,10 @@ class mms {
     return p;
   };
 
+  totalCost = (cW, cS) => {
+    return this.lq * cW + this.s * cS;
+  };
+
   general = () => {
     return {
       ro: this.d,
@@ -157,7 +166,8 @@ class mms {
 /* const m = new mms(2, 3, 2);
 console.log(m.general());
 console.log(m.pn(2));
-console.log(m.pnCumulative(2)); */
+console.log(m.pnCumulative(2));
+console.log(m.totalCost(15, 12)); */
 
 //----------------------------------------------------------
 /* Markovian Markovian s<1 con limite K de usuarios */
@@ -251,9 +261,48 @@ const sumatoryB = (a, u, s) => {
 //console.log(mmsk(2, 3, 1, 3));
 // Foto del ejemplo que si sirve: https://ibb.co/RSknMZc
 
+//----------------------------------------------------------
+/* MG1 */
 
+class mg1 {
+  constructor(aR, sR, sD, cS, cW) {
+    this.ro = aR / sR;
+    this.p0 = 1 - this.ro;
+    this.lq =
+      (Math.pow(aR, 2) * Math.pow(sD, 2) + Math.pow(this.ro, 2)) /
+      (2 * (1 - this.ro));
+    this.l = this.ro + this.lq;
+    this.wq = this.lq / aR;
+    this.w = this.wq + 1 / sR;
+  }
 
+  pn = (n) => {
+    return Math.pow(this.ro, n) * this.p0;
+  };
 
+  pnCumulative = (n) => {
+    let p = 0;
 
+    for (let i = 0; i <= n; i++) {
+      p += this.pn(i);
+    }
 
+    return p;
+  };
 
+  totalCost = (cW, cS) => {
+    return this.lq * cW + 1 * cS;
+  };
+
+  general = () => {
+    return { ...this, pn: null, pnCumulative: null };
+  };
+}
+
+/* Example usage */
+/* const m = new mg1(3, 5, 0.1, 15, 1);
+console.log(m.general());
+console.log(m.pn(0));
+console.log(m.pnCumulative(0));
+console.log(m.totalCost(15, 12));
+ */
