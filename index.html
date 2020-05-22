@@ -74,6 +74,126 @@
         <button class="row input" type="submit">Calcular</button class="input">
     </form>
 
+    <form class="inputs" id="mmsForm" onsubmit="return queue('mms')">
+        <div class="row">
+            <div class="input">
+                <label><span>λ</span> arrivals/minutes</label>
+                <input required type="number" min="0" name="a" value="2">
+            </div>
+
+            <div class="input">
+                <label><span>μ</span> services/minutes</label>
+                <input required type="number" min="0" name="u" value="3">
+            </div>
+            
+            <div class="input">
+                <label><span>S</span> number of servers</label>
+                <input required type="number" min="1" name="s" value="2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input">
+                <label>Waiting cost</label>
+                <input type="number" min="0" name="wc" value="15">
+            </div>
+            <div class="input">
+                <label>Waiting service</label>
+                <input type="number" min="1" name="ws" value="12">
+            </div>
+            <div class="input">
+                <label>Pn Single</label>
+                <input type="number" min="0" name="pn" value="2">
+            </div>
+            <div class="input">
+                <label>Pn Comulative</label>
+                <input type="number" min="2" name="pnc" value="2">
+            </div>
+        </div>
+        <button class="row input" type="submit">Calcular</button class="input">
+    </form>
+
+    <form class="inputs" id="mmskForm" onsubmit="return queue('mmsk')">
+        <div class="row">
+            <div class="input">
+                <label><span>λ</span> arrivals/minutes</label>
+                <input required type="number" min="0" name="a" value="2">
+            </div>
+
+            <div class="input">
+                <label><span>μ</span> services/minutes</label>
+                <input required type="number" min="0" name="u" value="3">
+            </div>
+            
+            <div class="input">
+                <label><span>S</span> number of servers</label>
+                <input required type="number" min="1" name="s" value="2">
+            </div>
+                        
+            <div class="input">
+                <label><span>K</span> limit of users</label>
+                <input required type="number" min="1" name="u" value="2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input">
+                <label>Waiting cost</label>
+                <input type="number" min="0" name="wc" value="15">
+            </div>
+            <div class="input">
+                <label>Waiting service</label>
+                <input type="number" min="1" name="ws" value="12">
+            </div>
+            <div class="input">
+                <label>Pn Single</label>
+                <input type="number" min="0" name="pn" value="2">
+            </div>
+            <div class="input">
+                <label>Pn Comulative</label>
+                <input type="number" min="2" name="pnc" value="2">
+            </div>
+        </div>
+        <button class="row input" type="submit">Calcular</button class="input">
+    </form>
+
+
+    <form class="inputs" id="mg1Form" onsubmit="return queue('mg1')">
+        <div class="row">
+            <div class="input">
+                <label><span>λ</span> arrivals/minutes</label>
+                <input required type="number" min="0" name="a" value="2">
+            </div>
+
+            <div class="input">
+                <label><span>μ</span> services/minutes</label>
+                <input required type="number" min="0" name="u" value="3">
+            </div>
+            
+            <div class="input">
+                <label><span>σ</span> standar deviaton</label>
+                <input required type="number" min="0" name="sd" step="0.01" value="0.1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="input">
+                <label>Waiting cost</label>
+                <input type="number" min="0" name="wc" value="15">
+            </div>
+            <div class="input">
+                <label>Waiting service</label>
+                <input type="number" min="1" name="ws" value="12">
+            </div>
+            <div class="input">
+                <label>Pn Single</label>
+                <input type="number" min="0" name="pn" value="2">
+            </div>
+            <div class="input">
+                <label>Pn Comulative</label>
+                <input type="number" min="2" name="pnc" value="2">
+            </div>
+        </div>
+        <button class="row input" type="submit">Calcular</button class="input">
+    </form>
+
     <div id="resultsTable">
 
     </div>
