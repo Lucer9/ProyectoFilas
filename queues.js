@@ -265,7 +265,7 @@ const sumatoryB = (a, u, s) => {
 /* MG1 */
 
 class mg1 {
-  constructor(aR, sR, sD, cS, cW) {
+  constructor(aR, sR, sD) {
     this.ro = aR / sR;
     this.p0 = 1 - this.ro;
     this.lq =
@@ -300,6 +300,7 @@ class mg1 {
 }
 
 /* Example usage */
+// alpha, miu, desviacionestandar,
 /* const m = new mg1(3, 5, 0.1, 15, 1);
 console.log(m.general());
 console.log(m.pn(0));
