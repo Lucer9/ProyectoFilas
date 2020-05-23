@@ -14,6 +14,22 @@ const sumatoryA = (a, u, s) => {
   return sum;
 };
 
+const sumatoryB = (a, u, s) => {
+  let sum = 0;
+  for (let n = 0; n < s + 1; n++) {
+    sum += Math.pow(a / u, n) / factorial(n);
+  }
+  return sum;
+};
+
+const sumatoryC = (a, u, s, k) => {
+  let sum = 0;
+  for (let n = s + 1; n < k + 1; n++) {
+    sum += Math.pow(a / (s * u), n - s);
+  }
+  return sum;
+};
+
 /*
 Esto es lo que quiere Polo para cada uno de los modelos:
 
@@ -171,95 +187,84 @@ console.log(m.totalCost(15, 12)); */
 
 //----------------------------------------------------------
 /* Markovian Markovian s<1 con limite K de usuarios */
-const mmsk = (a, u, s, k) => {
-  let n = 0;
+class mmsk {
+  constructor(a, u, s, k) {
+    this.a = a;
+    this.u = u;
+    this.s = s;
+    this.k = k;
 
-  //factor de utilizacion
-  const d = a / (s * u);
+    this.d = a / (s * u);
 
-  // p de que no haya unidades en el sistema
-  let p0Part1 = sumatoryB(a, u, s);
-  let p0Part2 = Math.pow(a / u, s) / factorial(s);
-  let p0Part3 = sumatoryC(a, u, s, k);
-  const p0 = 1 / (p0Part1 + p0Part2 * p0Part3);
-  //Probabilidad de haya n unidades en cola
-  let pn;
-  if (n <= s) {
-    pn = (Math.pow(a / u, n) / factorial(n)) * p0;
-  } else {
-    pn = (Math.pow(a / u, n) / factorial(s)) * Math.pow(s, n - s) * p0;
+    // p de que no haya unidades en el sistema
+    let p0Part1 = sumatoryB(a, u, s);
+    let p0Part2 = Math.pow(a / u, s) / factorial(s);
+    let p0Part3 = sumatoryC(a, u, s, k);
+    this.p0 = 1 / (p0Part1 + p0Part2 * p0Part3);
+
+    this.lq =
+      ((Math.pow(a / u, s) * (u * a)) /
+        (factorial(s - 1) * Math.pow(s * u - a, 2))) *
+      this.p0 *
+      (1 -
+        Math.pow(this.d, k - s) -
+        (k - s) * Math.pow(this.d, k - s) * (1 - this.d));
+
+    //Tiempo promedio de unidades en cola
+    const pk =
+      (Math.pow(a / u, k) / factorial(s)) * Math.pow(s, k - s) * this.p0;
+    const ae = a * (1 - pk);
+
+    //Tiempo promedio que una unidad pasa en la cola
+    this.wq = this.lq / ae;
+    this.ws = this.wq + 1 / u;
+
+    this.ls = ae * this.ws;
   }
-  if (n > k) {
-    pn = 0;
-  }
 
-  //Ni la menor idea que sea Cn, pero viene en la presentacion de bolo
-  let cn;
-  if (n <= s) {
-    cn = Math.pow(a / u, n) / factorial(n);
-  } else {
-    cn = (Math.pow(a / u, n) / factorial(s)) * Math.pow(s, n - s);
-  }
+  pn = (n) => {
+    if (n > this.k) {
+      return 0;
+    }
 
-  if (n > k) {
-    cn = 0;
-  }
+    //Probabilidad de haya n unidades en cola
+    if (n <= this.s) {
+      return (Math.pow(this.a / this.u, n) / factorial(n)) * this.p0;
+    }
 
-  //Tiempo promedio de unidades en cola
-  const lq =
-    ((Math.pow(a / u, s) * (u * a)) /
-      (factorial(s - 1) * Math.pow(s * u - a, 2))) *
-    p0 *
-    (1 - Math.pow(d, k - s) - (k - s) * Math.pow(d, k - s) * (1 - d));
-
-  const pk = (Math.pow(a / u, k) / factorial(s)) * Math.pow(s, k - s) * p0;
-  const ae = a * (1 - pk);
-
-  //Tiempo promedio que una unidad pasa en la cola
-  const wq = lq / ae;
-
-  //Tiempo promoedio que una unidad pasa en el sistema
-  const ws = wq + 1 / u;
-
-  //Tiempo promedio de unidades en el sistema
-  const ls = ae * ws;
-
-  //Probabilidad de que una unidad que llega tenga que esperar por el servicio
-  const pw = (Math.pow(a / u, s) / factorial(s)) * ((s * u) / (s * u - a)) * p0;
-
-  return {
-    d,
-    pk,
-    ae,
-    p0,
-    pn,
-    lq,
-    ls,
-    wq,
-    ws,
-    pw,
+    return (Math.pow(this.a / this.u, n) / factorial(this.s)) * Math.pow(this.s, n - this.s) * this.p0;
   };
-};
 
-const sumatoryC = (a, u, s, k) => {
-  let sum = 0;
-  for (let n = s + 1; n < k + 1; n++) {
-    sum += Math.pow(a / (s * u), n - s);
-  }
-  return sum;
-};
+  pnCumulative = (n) => {
+    let p = 0;
 
-const sumatoryB = (a, u, s) => {
-  let sum = 0;
-  for (let n = 0; n < s + 1; n++) {
-    sum += Math.pow(a / u, n) / factorial(n);
-  }
-  return sum;
-};
+    for (let i = 0; i <= n; i++) {
+      p += this.pn(i);
+    }
+
+    return p;
+  };
+
+  totalCost = (cW, cS) => {
+    return this.lq * cW + this.s * cS;
+  };
+
+  general = () => {
+    return {
+      ro: this.d,
+      p0: this.p0,
+      lq: this.lq,
+      l: this.ls,
+      wq: this.wq,
+      w: this.ws,
+    };
+  };
+}
 
 // Example usage
-//console.log(mmsk(2, 3, 1, 3));
-// Foto del ejemplo que si sirve: https://ibb.co/RSknMZc
+/* const m = new mmsk(2, 3, 1, 3);
+console.log(m.general());
+console.log(m.pn(3)); */
 
 //----------------------------------------------------------
 /* MG1 */
