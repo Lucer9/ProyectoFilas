@@ -68,18 +68,14 @@ class mm1 {
   }
 
   pn = (n) => {
-    if (n <= 1) {
-      return (Math.pow(this.a / this.u, n) / factorial(n)) * this.p0;
-    } else {
-      return (
-        (Math.pow(this.a / this.u, n) / factorial(1)) *
-        Math.pow(1, n - 1) *
-        this.p0
-      );
-    }
+    if (typeof n === "string") n = parseInt(n);
+
+    return (1 - this.d) * Math.pow(this.d, n);
   };
 
   pnCumulative = (n) => {
+    if (typeof n === "string") n = parseInt(n);
+
     let p = 0;
 
     for (let i = 0; i <= n; i++) {
@@ -138,19 +134,21 @@ class mms {
   }
 
   pn = (n) => {
+    if (typeof n === "string") n = parseInt(n);
     //Probabilidad de haya n unidades en cola
-    if (n <= this.s) {
+    if (n < this.s) {
       return (Math.pow(this.a / this.u, n) / factorial(n)) * this.p0;
-    } else {
-      return (
-        (Math.pow(this.a / this.u, n) / factorial(this.s)) *
-        Math.pow(this.s, n - this.s) *
-        this.p0
-      );
     }
+
+    return (
+      (Math.pow(this.a / this.u, n) * this.p0) /
+      (factorial(this.s) * Math.pow(this.s, n - this.s))
+    );
   };
 
   pnCumulative = (n) => {
+    if (typeof n === "string") n = parseInt(n);
+
     let p = 0;
 
     for (let i = 0; i <= n; i++) {
@@ -223,19 +221,26 @@ class mmsk {
   }
 
   pn = (n) => {
+    if (typeof n === "string") n = parseInt(n);
+
     if (n > this.k) {
       return 0;
     }
 
     //Probabilidad de haya n unidades en cola
-    if (n <= this.s) {
+    if (n < this.s) {
       return (Math.pow(this.a / this.u, n) / factorial(n)) * this.p0;
     }
 
-    return (Math.pow(this.a / this.u, n) / factorial(this.s)) * Math.pow(this.s, n - this.s) * this.p0;
+    return (
+      (Math.pow(this.a / this.u, n) * this.p0) /
+      (factorial(this.s) * Math.pow(this.s, n - this.s))
+    );
   };
 
   pnCumulative = (n) => {
+    if (typeof n === "string") n = parseInt(n);
+
     let p = 0;
 
     for (let i = 0; i <= n; i++) {
@@ -282,10 +287,14 @@ class mg1 {
   }
 
   pn = (n) => {
+    if (typeof n === "string") n = parseInt(n);
+
     return Math.pow(this.ro, n) * this.p0;
   };
 
   pnCumulative = (n) => {
+    if (typeof n === "string") n = parseInt(n);
+
     let p = 0;
 
     for (let i = 0; i <= n; i++) {

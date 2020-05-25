@@ -40,26 +40,26 @@ function queue(type) {
       general = m.general();
       htmlString += `
       <tr> <td>ρ</td><td>${general.ro.toFixed(5)}</td></tr>
-      <tr> <td>p0</td><td>${general.p0.toFixed(5)}</td></tr>
-      <tr> <td>lq</td><td>${general.lq.toFixed(5)}</td></tr>
-      <tr> <td>l</td><td>${general.l.toFixed(5)}</td></tr>
-      <tr> <td>wq</td><td>${general.wq.toFixed(5)}</td></tr>
-      <tr> <td>w</td><td>${general.w.toFixed(5)}</td></tr>
+      <tr> <td>P0</td><td>${general.p0.toFixed(5)}</td></tr>
+      <tr> <td>Lq</td><td>${general.lq.toFixed(5)}</td></tr>
+      <tr> <td>L</td><td>${general.l.toFixed(5)}</td></tr>
+      <tr> <td>Wq</td><td>${general.wq.toFixed(5)}</td></tr>
+      <tr> <td>W</td><td>${general.w.toFixed(5)}</td></tr>
       `;
       if (ws == "" ? wc != "" : wc == "") {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
       }
 
       if (pn != "") {
-        htmlString += `<tr><td>p(${pn})</td><td>${m
+        htmlString += `<tr><td>P(${pn})</td><td>${m
           .pn(pn)
           .toFixed(5)}</td></tr>`;
       }
       if (pnc != "") {
-        htmlString += `<tr><td>p acc(${pnc})</td><td>${m
+        htmlString += `<tr><td>P acc(${pnc})</td><td>${m
           .pnCumulative(pnc)
           .toFixed(5)}</td></tr>`;
       }
@@ -80,26 +80,26 @@ function queue(type) {
       general = m.general();
       htmlString += `
           <tr> <td>ρ</td><td>${general.ro.toFixed(5)}</td></tr>
-          <tr> <td>p0</td><td>${general.p0.toFixed(5)}</td></tr>
-          <tr> <td>lq</td><td>${general.lq.toFixed(5)}</td></tr>
-          <tr> <td>l</td><td>${general.l.toFixed(5)}</td></tr>
-          <tr> <td>wq</td><td>${general.wq.toFixed(5)}</td></tr>
-          <tr> <td>w</td><td>${general.w.toFixed(5)}</td></tr>
+          <tr> <td>P0</td><td>${general.p0.toFixed(5)}</td></tr>
+          <tr> <td>Lq</td><td>${general.lq.toFixed(5)}</td></tr>
+          <tr> <td>L</td><td>${general.l.toFixed(5)}</td></tr>
+          <tr> <td>Wq</td><td>${general.wq.toFixed(5)}</td></tr>
+          <tr> <td>W</td><td>${general.w.toFixed(5)}</td></tr>
           `;
       if (ws == "" ? wc != "" : wc == "") {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
       }
 
       if (pn != "") {
-        htmlString += `<tr><td>p(${pn})</td><td>${m
+        htmlString += `<tr><td>P(${pn})</td><td>${m
           .pn(pn)
           .toFixed(5)}</td></tr>`;
       }
       if (pnc != "") {
-        htmlString += `<tr><td>p acc(${pnc})</td><td>${m
+        htmlString += `<tr><td>P acc(${pnc})</td><td>${m
           .pnCumulative(pnc)
           .toFixed(5)}</td></tr>`;
       }
@@ -120,26 +120,26 @@ function queue(type) {
       general = m.general();
       htmlString += `
           <tr> <td>ρ</td><td>${general.ro.toFixed(5)}</td></tr>
-          <tr> <td>p0</td><td>${general.p0.toFixed(5)}</td></tr>
-          <tr> <td>lq</td><td>${general.lq.toFixed(5)}</td></tr>
-          <tr> <td>l</td><td>${general.l.toFixed(5)}</td></tr>
-          <tr> <td>wq</td><td>${general.wq.toFixed(5)}</td></tr>
-          <tr> <td>w</td><td>${general.w.toFixed(5)}</td></tr>
+          <tr> <td>P0</td><td>${general.p0.toFixed(5)}</td></tr>
+          <tr> <td>Lq</td><td>${general.lq.toFixed(5)}</td></tr>
+          <tr> <td>L</td><td>${general.l.toFixed(5)}</td></tr>
+          <tr> <td>Wq</td><td>${general.wq.toFixed(5)}</td></tr>
+          <tr> <td>W</td><td>${general.w.toFixed(5)}</td></tr>
           `;
       if (ws == "" ? wc != "" : wc == "") {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
       }
 
       if (pn != "") {
-        htmlString += `<tr><td>p(${pn})</td><td>${m
+        htmlString += `<tr><td>P(${pn})</td><td>${m
           .pn(pn)
           .toFixed(5)}</td></tr>`;
       }
       if (pnc != "") {
-        htmlString += `<tr><td>p acc(${pnc})</td><td>${m
+        htmlString += `<tr><td>P acc(${pnc})</td><td>${m
           .pnCumulative(pnc)
           .toFixed(5)}</td></tr>`;
       }
@@ -160,26 +160,26 @@ function queue(type) {
       general = m.general();
       htmlString += `
           <tr> <td>ρ</td><td>${general.ro.toFixed(5)}</td></tr>
-          <tr> <td>p0</td><td>${general.p0.toFixed(5)}</td></tr>
-          <tr> <td>lq</td><td>${general.lq.toFixed(5)}</td></tr>
-          <tr> <td>l</td><td>${general.l.toFixed(5)}</td></tr>
-          <tr> <td>wq</td><td>${general.wq.toFixed(5)}</td></tr>
-          <tr> <td>w</td><td>${general.w.toFixed(5)}</td></tr>
+          <tr> <td>P0</td><td>${general.p0.toFixed(5)}</td></tr>
+          <tr> <td>Lq</td><td>${general.lq.toFixed(5)}</td></tr>
+          <tr> <td>L</td><td>${general.l.toFixed(5)}</td></tr>
+          <tr> <td>Wq</td><td>${general.wq.toFixed(5)}</td></tr>
+          <tr> <td>W</td><td>${general.w.toFixed(5)}</td></tr>
           `;
       if (ws == "" ? wc != "" : wc == "") {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
       }
 
       if (pn != "") {
-        htmlString += `<tr><td>p(${pn})</td><td>${m
+        htmlString += `<tr><td>P(${pn})</td><td>${m
           .pn(pn)
           .toFixed(5)}</td></tr>`;
       }
       if (pnc != "") {
-        htmlString += `<tr><td>p acc(${pnc})</td><td>${m
+        htmlString += `<tr><td>P acc(${pnc})</td><td>${m
           .pnCumulative(pnc)
           .toFixed(5)}</td></tr>`;
       }
