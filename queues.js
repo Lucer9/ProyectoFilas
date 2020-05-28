@@ -209,15 +209,13 @@ class mmsk {
         (k - s) * Math.pow(this.d, k - s) * (1 - this.d));
 
     //Tiempo promedio de unidades en cola
-    const pk =
-      (Math.pow(a / u, k) / factorial(s)) * Math.pow(s, k - s) * this.p0;
-    const ae = a * (1 - pk);
+    this.ae = a * (1 - this.pn(k));
 
     //Tiempo promedio que una unidad pasa en la cola
-    this.wq = this.lq / ae;
+    this.wq = this.lq / this.ae;
     this.ws = this.wq + 1 / u;
 
-    this.ls = ae * this.ws;
+    this.ls = this.ae * this.ws;
   }
 
   pn = (n) => {
@@ -258,6 +256,7 @@ class mmsk {
     return {
       ro: this.d,
       p0: this.p0,
+      ae: this.ae,
       lq: this.lq,
       l: this.ls,
       wq: this.wq,

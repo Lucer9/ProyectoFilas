@@ -50,7 +50,9 @@ function queue(type) {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(
+          5
+        )}</td></tr>`;
       }
 
       if (pn != "") {
@@ -90,7 +92,9 @@ function queue(type) {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(
+          5
+        )}</td></tr>`;
       }
 
       if (pn != "") {
@@ -121,6 +125,7 @@ function queue(type) {
       htmlString += `
           <tr> <td>ρ</td><td>${general.ro.toFixed(5)}</td></tr>
           <tr> <td>P0</td><td>${general.p0.toFixed(5)}</td></tr>
+          <tr> <td>𝜆e</td><td>${general.ae.toFixed(5)}</td></tr>
           <tr> <td>Lq</td><td>${general.lq.toFixed(5)}</td></tr>
           <tr> <td>L</td><td>${general.l.toFixed(5)}</td></tr>
           <tr> <td>Wq</td><td>${general.wq.toFixed(5)}</td></tr>
@@ -130,7 +135,9 @@ function queue(type) {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(
+          5
+        )}</td></tr>`;
       }
 
       if (pn != "") {
@@ -148,7 +155,6 @@ function queue(type) {
       a = parseFloat(form.elements.namedItem("a").value);
       u = parseFloat(form.elements.namedItem("u").value);
       sd = parseFloat(form.elements.namedItem("sd").value);
-
 
       ws = form.elements.namedItem("ws").value;
       wc = form.elements.namedItem("wc").value;
@@ -170,7 +176,9 @@ function queue(type) {
         alert("Completa ambos campos de servicio");
       } else if (ws != "" && wc != "") {
         const totalCost = m.totalCost(parseFloat(wc), parseFloat(ws));
-        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(5)}</td></tr>`;
+        htmlString += `<tr><td>Total cost</td><td>${totalCost.toFixed(
+          5
+        )}</td></tr>`;
       }
 
       if (pn != "") {
